@@ -10,7 +10,7 @@ User=%I
 # -N Just open the connection and do nothing (not interactive)
 # LOCALPORT:IP_ON_EXAMPLE_COM:PORT_ON_EXAMPLE_COM
 EnvironmentFile=/etc/autossh-service.conf
-ExecStart=/usr/bin/autossh -M 0 -N -q -o "ServerAliveInterval 60" -o "ServerAliveCountMax 3" -p 22 -l tunnel ${AUTOSSH_HOST} -L ${AUTOSSH_PORT}:127.0.0.1:${AUTOSSH_PORT} -i /home/autossh/.ssh/id_rsa
+ExecStart=/usr/bin/autossh $OPTIONS -R ${AUTOSSH_PORT} ${AUTOSSH_HOST}
 
 [Install]
 WantedBy=multi-user.target
