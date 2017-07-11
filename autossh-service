@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+set -e
+
+. /etc/autossh-service.conf
+
+/usr/bin/autossh -v $OPTIONS -R ${AUTOSSH_PORT} ${AUTOSSH_HOST}

@@ -1,16 +1,11 @@
 [Unit]
-Description=Keeps a tunnel to '${AUTOSSH_HOST}' open as user %I
-After=network.target
+Description=Keeps a tunnel to a host open as user %I
+Wants=network-online.target
+After=network.target network-online.target
 
 [Service]
 User=%I
-# -p [PORT]
-# -l [user]
-# -M 0 --> no monitoring
-# -N Just open the connection and do nothing (not interactive)
-# LOCALPORT:IP_ON_EXAMPLE_COM:PORT_ON_EXAMPLE_COM
-EnvironmentFile=/etc/autossh-service.conf
-ExecStart=/usr/bin/autossh $OPTIONS -R ${AUTOSSH_PORT} ${AUTOSSH_HOST}
+ExecStart=/usr/sbin/autossh-service
 
 [Install]
 WantedBy=multi-user.target

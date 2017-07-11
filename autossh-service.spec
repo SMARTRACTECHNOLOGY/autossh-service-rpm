@@ -1,7 +1,7 @@
 %{?systemd_requires}
 # Upstream package name naturally contains an underscore
 Name:           autossh-service
-Version:        3
+Version:        4
 Release:        1
 Summary:        Unit file for an autossh systemd service
 
@@ -16,6 +16,7 @@ BuildRequires:  systemd
 URL:            https://github.com/smartractechnology
 Source0:        autossh-service@.service
 Source1:        autossh-service.conf
+Source10:       autossh-service
 BuildArch:      noarch
 
 %define         _serviceUsername autossh
@@ -31,14 +32,17 @@ echo "Nothing to build"
 
 %install
 mkdir -p %{buildroot}/%{_sysconfdir}
+mkdir -p %{buildroot}/%{_sbindir}
 mkdir -p %{buildroot}/%{_unitdir}
 
+install -p -m 644 %{SOURCE10} %{buildroot}/%{_sbindir}
 install -p -m 644 %{SOURCE0} %{buildroot}/%{_unitdir}
 install -p -m 644 %{SOURCE1} %{buildroot}/%{_sysconfdir}
 
 %files
 %config(noreplace) %{_sysconfdir}/%{name}.conf
 %attr(0644, root, root) %{_unitdir}/%{name}@.service
+%attr(0754, root, root) %{_sbindir}/%{name}
 
 %post
 %systemd_post %{name}@.service
@@ -50,6 +54,9 @@ install -p -m 644 %{SOURCE1} %{buildroot}/%{_sysconfdir}
 %systemd_postun_with_restart %{name}@.service
 
 %changelog
+* Tue Jul 11 2017 Robert Van Voorhees <rcvanvo@gmail.com> - 4-1
+- Change to external script.
+
 * Tue Jul 11 2017 Robert Van Voorhees <rcvanvo@gmail.com> - 3-1
 - Move more options into conf file.
 
