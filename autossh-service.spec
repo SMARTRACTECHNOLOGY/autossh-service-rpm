@@ -2,7 +2,7 @@
 # Upstream package name naturally contains an underscore
 Name:           autossh-service
 Version:        4
-Release:        1
+Release:        2
 Summary:        Unit file for an autossh systemd service
 
 Group:          System Environment/Base
