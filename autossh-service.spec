@@ -1,7 +1,7 @@
 %{?systemd_requires}
 # Upstream package name naturally contains an underscore
 Name:           autossh-service
-Version:        1
+Version:        2
 Release:        1
 Summary:        Unit file for an autossh systemd service
 
@@ -14,7 +14,7 @@ Requires:       autossh
 BuildRequires:  systemd
 
 URL:            https://github.com/smartractechnology
-Source0:        autossh-service.service
+Source0:        autossh-service@.service
 Source1:        autossh-service.conf
 BuildArch:      noarch
 
@@ -37,15 +37,8 @@ install -p -m 644 %{SOURCE0} %{buildroot}/%{_unitdir}
 install -p -m 644 %{SOURCE1} %{buildroot}/%{_sysconfdir}
 
 %files
-%config(noreplace) %{_sysconfdir}/autossh-service.conf
-%attr(0644, root, root) %{_unitdir}/autossh-service.service
-
-%pre
-getent group %{_serviceUsername} >/dev/null || groupadd -r %{_serviceUsername}
-getent passwd %{_serviceUsername} >/dev/null || \
-    useradd -r -g %{_serviceUsername} -d /var/lib/%{name} -s /sbin/nologin \
-    -c "autossh service account" %{_serviceUsername}
-exit 0
+%config(noreplace) %{_sysconfdir}/%{name}.conf
+%attr(0644, root, root) %{_unitdir}/%{name}@.service
 
 %post
 %systemd_post %{name}.service
@@ -57,5 +50,8 @@ exit 0
 %systemd_postun_with_restart %{name}.service
 
 %changelog
+* Tue Jul 11 2017 Robert Van Voorhees <rcvanvo@gmail.com> - 2-1
+- Remove user information and make the service parameterized
+
 * Sat May 6 2017 Robert Van Voorhees <rcvanvo@gmail.com> - 1-1
 - Initial RPM release
