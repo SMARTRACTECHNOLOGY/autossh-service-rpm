@@ -42,7 +42,7 @@ install -p -m 644 %{SOURCE1} %{buildroot}/%{_sysconfdir}
 %files
 %config(noreplace) %{_sysconfdir}/%{name}.conf
 %attr(0644, root, root) %{_unitdir}/%{name}@.service
-%attr(0754, root, root) %{_sbindir}/%{name}
+%attr(0755, root, root) %{_sbindir}/%{name}
 
 %post
 %systemd_post %{name}@.service
@@ -54,6 +54,9 @@ install -p -m 644 %{SOURCE1} %{buildroot}/%{_sysconfdir}
 %systemd_postun_with_restart %{name}@.service
 
 %changelog
+* Tue Jul 11 2017 Robert Van Voorhees <rcvanvo@gmail.com> - 4-2
+- Allow other users to execute the script.
+
 * Tue Jul 11 2017 Robert Van Voorhees <rcvanvo@gmail.com> - 4-1
 - Change to external script.
 
