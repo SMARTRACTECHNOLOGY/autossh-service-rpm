@@ -20,8 +20,8 @@ ifdef::env-github[]
 :warning-caption: :warning:
 endif::[]
 
-### DEPRECATED
-## This repository has been deprecated, and replaced with https://github.com/SMARTRACTECHNOLOGY/gateway-os
+# DEPRECATED
+### This repository has been deprecated, and replaced with https://github.com/SMARTRACTECHNOLOGY/gateway-os
 
 RPM spec file for an autossh systemd service
 
