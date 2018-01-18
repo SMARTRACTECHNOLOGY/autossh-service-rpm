@@ -22,6 +22,9 @@ endif::[]
 
 RPM spec file for an autossh systemd service
 
+## DEPRECATED
+This repository has been deprecated, and replaced with https://github.com/SMARTRACTECHNOLOGY/gateway-os
+
 == Building
 
 NOTE: This assumes you already copied the `build-rpm.sh` script from https://github.com/SMARTRACTECHNOLOGY/rpmdevtools-docker[rpmdevtools-docker] to a `${PATH}` accessible place.
